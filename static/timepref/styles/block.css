@@ -1,0 +1,29 @@
+.timepref__heading {
+    margin: 1em 0;
+    text-align: center;
+}
+
+.timepref__question-start:not(:first-child) {
+    border-top: 2px solid #ccc;
+}
+
+.timepref__question-start th {
+    vertical-align: middle;
+    background-color: #baf8b9;
+}
+
+.timepref__question-unanswered th {
+    background-color: #e5e5e5;
+}
+
+.timepref__question-choice,
+.timepref__question-choice input {
+    cursor: pointer;
+}
+.timepref__question-choice:hover {
+    background-color: #e5e5e5;
+}
+
+.timepref__next-button {
+    display: none;
+}

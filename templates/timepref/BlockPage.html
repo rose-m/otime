@@ -1,0 +1,72 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load staticfiles %}
+
+{% block title %}
+Block {{ step }} of {{ num_blocks }}
+{% endblock %}
+
+{% block content %}
+
+<hr>
+
+<div class="progress">
+    <div class="progress-bar" style="width: {{ progress }}%">{{ step }} / {{ num_blocks }}</div>
+</div>
+
+<hr>
+
+<h1 class="timepref__heading">
+    <span class="text-uppercase">{{ curr_block.text_delay_start }}</span>
+    and
+    <span class="text-uppercase">{{ curr_block.text_total_end }}</span>
+    from today
+</h1>
+
+<table class="table table-bordered">
+    <tbody>
+    {% for question in curr_block.questions %}
+    <tr class="timepref__question-start timepref__question-unanswered timepref__question-index-{{question.question_number}}">
+        <th rowspan="3">{{ question.question_number }}.</th>
+        <td>payment <span class="text-uppercase">{{ curr_block.text_delay_start }}</span>...</td>
+        {% for value in question.start_values %}
+        <td class="text-center">{{ value|c }}</td>
+        {% endfor %}
+    </tr>
+    <tr class="timepref__question-end">
+        <td>and payment <span class="text-uppercase">{{ curr_block.text_total_end }}</span></td>
+        {% for value in question.end_values %}
+        <td class="text-center">{{ value|c }}</td>
+        {% endfor %}
+    </tr>
+    <tr class="timepref__question-choices" data-question-index="{{question.question_number}}">
+        <td></td>
+        {% for index in question.choice_index %}
+        <td class="text-center timepref__question-choice">
+            <input type="radio" name="question_{{question.question_number}}" value="{{ index }}" />
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<input id="timepref__answers" type="hidden" name="block_answers" data-block-index="{{ block_index }}" value="{{ player.block_answers }}">
+
+<div class="timepref__waiting">
+    You need to fill out all choices in order to continue.
+</div>
+
+<div class="timepref__next-button">
+{% next_button %}
+</div>
+
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'timepref/styles/block.css' %}"/>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'timepref/scripts/block.js' %}"></script>
+{% endblock %}
