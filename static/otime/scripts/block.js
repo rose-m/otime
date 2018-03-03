@@ -1,12 +1,22 @@
 (function () {
+    /*
+        We use an IIFE to properly encapsulate all JavaScript code and prevent
+        leaking anything into global scope.
+     */
     var answersInput = jQuery('#timepref__answers');
     if (!answersInput.length) {
         throw new Error('cannot find answers input #timepref__answers')
     }
+
+    // Block index and state are read from existing DOM elements
     var blockIndex = parseInt(answersInput.attr('data-block-index')) - 1;
     var state = JSON.parse(answersInput.val() || '[]');
 
     jQuery('.timepref__question-choices').each(function () {
+        /*
+            We parse every existing choice row and register proper listeners to handle user selection
+            of choices.
+         */
         var choiceRow = jQuery(this);
         var questionIndex = parseInt(choiceRow.attr('data-question-index'));
         var questionRow = jQuery('.timepref__question-index-' + questionIndex);
@@ -29,6 +39,9 @@
         });
     });
 
+    /**
+     * Serializes the current user selection and updates the current state of Block answers
+     */
     function updateState() {
         var blockState = [];
         jQuery('.timepref__question-choices').each(function () {
@@ -40,6 +53,9 @@
         answersInput.val(JSON.stringify(state));
     }
 
+    /**
+     * Checks whether all questions have yet been answered by the user, i.e. a choice has been selected
+     */
     function checkAllQuestions() {
         if (jQuery('.timepref__question-unanswered').length) {
             jQuery('.timepref__next-button').hide();

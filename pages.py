@@ -3,10 +3,17 @@ from .config import BLOCKS
 
 
 class BlockPage(Page):
+    """Displays a `Block` to the player
+
+    This page will automatically retrieve the current `Block` to be displayed
+    to the player from the player's current block.
+    """
+
     form_model = 'player'
     form_fields = ['block_answers']
 
     def is_displayed(self):
+        """This page will only be displayed when there are blocks left"""
         return self.player.get_current_block() is not None
 
     def vars_for_template(self):
