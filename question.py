@@ -30,12 +30,12 @@ class Question:
         """Get the list of initial payoff values (at point t)
 
         The list of values will start with `config.TOTAL_BUDGET / p` and end at `0`.
-        All values will be rounded to two decimals.
+        All values will be rounded to one decimal.
 
         :return: List of initial payoffs
         """
         from .config import TOTAL_BUDGET
-        start = round(TOTAL_BUDGET / self.p, 2)
+        start = round(TOTAL_BUDGET / self.p, 1)
         unrounded = [(self.num_choices - 1 - i) * start / (self.num_choices - 1) for i in range(self.num_choices)]
         return [round(v, 1) for v in unrounded]
 
@@ -43,7 +43,7 @@ class Question:
         """Get the list of final payoff values (at point t + k)
 
         The list of values will start with `0` and end at `config.TOTAL_BUDGET`.
-        All values will be rounded to two decimals.
+        All values will be rounded to one decimal.
 
         :return: List of final payoffs
         """
