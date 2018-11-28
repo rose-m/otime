@@ -47,6 +47,14 @@ Block {{ step }} of {{ num_blocks }}
         </td>
         {% endfor %}
     </tr>
+    {% if not forloop.last %}
+    <tr class="timepref__spacer">
+        <td></td>
+        {% for value in question.start_values %}
+        <td></td>
+        {% endfor %}
+    </tr>
+    {% endif %}
     {% endfor %}
     </tbody>
 </table>

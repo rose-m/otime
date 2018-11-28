@@ -3,13 +3,25 @@
     text-align: center;
 }
 
-.timepref__question-start:not(:first-child) {
+.timepref__spacer {
+    border: none;
+    border-left: 1px solid #fff;
+}
+.timepref__spacer td {
+    border: none;
+}
+
+.timepref__question-start {
     border-top: 2px solid #ccc;
+}
+.timepref__question-choices {
+    border-bottom: 2px solid #ccc;
 }
 
 .timepref__question-start th {
     vertical-align: middle;
     background-color: #baf8b9;
+    border-bottom: 2px solid #ccc;
 }
 
 .timepref__question-unanswered th {
@@ -22,6 +34,10 @@
 }
 .timepref__question-choice:hover {
     background-color: #e5e5e5;
+}
+.timepref__question-choice-selected,
+.timepref__question-choice-selected:hover {
+    background-color: #baf8b9;
 }
 
 .timepref__next-button {

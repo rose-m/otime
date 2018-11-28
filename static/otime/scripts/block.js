@@ -5,7 +5,7 @@
      */
     var answersInput = jQuery('#timepref__answers');
     if (!answersInput.length) {
-        throw new Error('cannot find answers input #timepref__answers')
+        throw new Error('cannot find answers input #timepref__answers');
     }
 
     // Block index and state are read from existing DOM elements
@@ -29,8 +29,14 @@
         });
 
         choiceRow.find('input').on('change', function () {
+            choiceRow
+                .find('.timepref__question-choice-selected')
+                .removeClass('timepref__question-choice-selected');
             if (choiceRow.find('input:checked').length) {
                 questionRow.removeClass('timepref__question-unanswered');
+                choiceRow.find('input:checked')
+                    .closest('.timepref__question-choice')
+                    .addClass('timepref__question-choice-selected');
             } else {
                 questionRow.addClass('timepref__question-unanswered');
             }
