@@ -16,8 +16,8 @@ class Question:
         """
         self.block = block
         self.index = index
-        self.num_choices = block.n + 2
-        self.p = self.block.p_values[self.index]
+        self.num_choices = block.number_of_intermediate_choices + 2
+        self.interest_rate = self.block.interest_rates[self.index]
 
     def question_number(self) -> int:
         """Get the number of this question in the block
@@ -35,7 +35,7 @@ class Question:
         :return: List of initial payoffs
         """
         from .config import TOTAL_BUDGET
-        start = round(TOTAL_BUDGET / self.p, 1)
+        start = round(TOTAL_BUDGET / self.interest_rate, 1)
         unrounded = [(self.num_choices - 1 - i) * start / (self.num_choices - 1) for i in range(self.num_choices)]
         return [round(v, 1) for v in unrounded]
 

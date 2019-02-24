@@ -5,6 +5,8 @@ Modify this file to set all your preferences - also modify `templates/otime/Resu
 which will be displayed after all questions of all blocks have been answered.
 
 It's not recommended to edit any of the other files.
+
+Be sure to also check the README.md file!
 """
 
 from .block import Block
@@ -16,17 +18,24 @@ TOTAL_BUDGET = 20
 RANDOMIZE_BLOCKS = False
 
 #: The configuration for all blocks to be displayed to the user
+#: Note:
+#: - The given delays are treated as WEEKS where an initial delay of 0 means today.
+#: - The order of interest_rates given is the order in which they will be display, i.e.
+#:      to change the order of display just change the order of values here
+#: - If you want to show the least money as initial payout as first option set
+#:      show_least_initial_value_first to True.
 BLOCKS = [
     Block(
-        p_values=[1.05, 1.10, 1.15, 1.20],
-        t=0,
-        k=35,
-        n=4
+        interest_rates=[1.05, 1.10, 1.15, 1.20],
+        initial_payout_delay=0,
+        initial_to_last_payout_delay=35,
+        number_of_intermediate_choices=4,
+        show_least_initial_value_first=True
     ),
     Block(
-        p_values=[1.10, 1.03],
-        t=5,
-        k=35,
-        n=4
+        interest_rates=[1.10, 1.03],
+        initial_payout_delay=5,
+        initial_to_last_payout_delay=35,
+        number_of_intermediate_choices=4
     )
 ]
