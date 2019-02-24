@@ -38,7 +38,7 @@ BLOCKS = [
 ## Output
 The output of the app is stored per `Player` in the player's `block_answers` field. The field content is a string that equals a two-dimensional JSON array, as in the following example:
 
-```json
+```
 [
   [2, 5, 7, 8], // Block 1
   [1, 3, 6, 6, 7] // Block 2
