@@ -23,9 +23,11 @@ Block {{ step }} of {{ num_blocks }}
     from today
 </h1>
 
-<table class="table table-bordered">
+<table class="table table-bordered {% if use_slider %}timepref__with-slider{% endif %}">
     <tbody>
     {% for question in curr_block.questions %}
+
+    {% if not use_slider %}
     <tr class="timepref__question-start timepref__question-unanswered timepref__question-index-{{question.question_number}}">
         <th rowspan="3">{{ question.question_number }}.</th>
         <td>payment <span class="text-uppercase">{{ curr_block.text_delay_start }}</span>...</td>
@@ -47,6 +49,30 @@ Block {{ step }} of {{ num_blocks }}
         </td>
         {% endfor %}
     </tr>
+    {% endif %} <!-- // endif: not use_slider -->
+
+    {% if use_slider %}
+    <tr class="timepref__question-start timepref__question-index-{{question.question_number}}">
+        <th rowspan="3">{{ question.question_number }}.</th>
+        <td>payment <span class="text-uppercase">{{ curr_block.text_delay_start }}</span>...</td>
+        {% for value in question.start_values %}
+        <td class="text-center">{{ value|c }}</td>
+        {% endfor %}
+    </tr>
+    <tr class="timepref__question-choices" data-question-index="{{question.question_number}}">
+        <td></td>
+        <td colspan="6">
+            <input type="range" min="1" max="6" step="1" value="1"/>
+        </td>
+    </tr>
+    <tr class="timepref__question-end">
+        <td>and payment <span class="text-uppercase">{{ curr_block.text_total_end }}</span></td>
+        {% for value in question.end_values %}
+        <td class="text-center">{{ value|c }}</td>
+        {% endfor %}
+    </tr>
+    {% endif %} <!-- // endif: use_slider -->
+
     {% if not forloop.last %}
     <tr class="timepref__spacer">
         <td></td>
@@ -54,8 +80,9 @@ Block {{ step }} of {{ num_blocks }}
         <td></td>
         {% endfor %}
     </tr>
-    {% endif %}
-    {% endfor %}
+    {% endif %} <!-- // endif: forloop.last -->
+
+    {% endfor %} <!-- // endfor: curr_block.questions -->
     </tbody>
 </table>
 
@@ -73,8 +100,10 @@ Block {{ step }} of {{ num_blocks }}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'otime/styles/block.css' %}"/>
+<link rel="stylesheet" href="{% static 'otime/styles/rangeslider.css' %}"/>
 {% endblock %}
 
 {% block scripts %}
+<script src="{% static 'otime/scripts/rangeslider.min.js' %}"></script>
 <script src="{% static 'otime/scripts/block.js' %}"></script>
 {% endblock %}

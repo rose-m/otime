@@ -16,13 +16,17 @@ RANDOMIZE_BLOCKS = False
 When set to `True` the `BLOCKS` configured afterwards will not be displayed in the order entered inside the configuration file but in a random order. The output will still be saved as if the blocks were displayed *not randomized*.
 
 ```python
+VISUALIZE_CHOICES_AS_SLIDER = False
+```
+Setting this variable to affects how the choices of a question in a block can be selected. When `False` (default) then the player will be faced with several radio buttons to do the selection. When `True`, a slider will be displayed allowing a more intuitive type of selection.
+
+```python
 BLOCKS = [
     Block(
         interest_rates=[1.05, 1.10, 1.15, 1.20],
         initial_payout_delay=0,
         initial_to_last_payout_delay=35,
-        number_of_intermediate_choices=4,
-        show_least_initial_value_first=True
+        number_of_intermediate_choices=4
     ),
     ... # more Blocks
 ]
@@ -33,7 +37,6 @@ BLOCKS = [
 - `initial_payout_delay`: The number of *weeks* between *today* and the initial payout. If `initial_payout_delay = 0` then the initial payout is *today*.
 - `initial_to_last_payout_delay`: The number of *weeks* between the *initial payout* and the *last payout*. As such the *last payout* is in `initial_payout_delay + initial_to_last_payout_delay` *weeks* total.
 - `number_of_intermediate_choices`: The number of choices between the two fixed edge choices. The two fixed edge choices are `[Sooner: TOTAL_BUDGET / interest_rate, Later: 0]` and `[Sooner: 0, Later: TOTAL_BUDGET]`.
-- `show_least_initial_value_first`: When set to `True` then for each interest rate the choice with the least amount of money sooner will be displayed first. Typically, the choice with the most amount of money sooner will be displayed first.
 
 ## Output
 The output of the app is stored per `Player` in the player's `block_answers` field. The field content is a string that equals a two-dimensional JSON array, as in the following example:

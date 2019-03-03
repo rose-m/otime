@@ -17,6 +17,12 @@
 .timepref__question-choices {
     border-bottom: 2px solid #ccc;
 }
+.timepref__with-slider .timepref__question-choices {
+    border-bottom: none !important;
+}
+.timepref__with-slider .timepref__question-end {
+    border-bottom: 2px solid #ccc;
+}
 
 .timepref__question-start th {
     vertical-align: middle;

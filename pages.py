@@ -1,5 +1,5 @@
 from ._builtin import Page, WaitPage
-from .config import BLOCKS
+from .config import BLOCKS, VISUALIZE_CHOICES_AS_SLIDER
 
 
 class BlockPage(Page):
@@ -26,7 +26,8 @@ class BlockPage(Page):
             'block_index': block_index,
             'num_blocks': num_blocks,
             'progress': round(step * 100 / num_blocks),
-            'curr_block': current_block
+            'curr_block': current_block,
+            'use_slider': VISUALIZE_CHOICES_AS_SLIDER
         }
 
     def error_message(self, values):

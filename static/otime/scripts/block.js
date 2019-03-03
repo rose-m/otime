@@ -20,6 +20,7 @@
         var choiceRow = jQuery(this);
         var questionIndex = parseInt(choiceRow.attr('data-question-index'));
         var questionRow = jQuery('.timepref__question-index-' + questionIndex);
+        var valueWidth = jQuery('.timepref__question-start td.text-center').first().width();
 
         choiceRow.find('.timepref__question-choice').on('click', function (e) {
             if (jQuery(e.target).is('input')) {
@@ -28,7 +29,7 @@
             jQuery(this).find('input').click();
         });
 
-        choiceRow.find('input').on('change', function () {
+        choiceRow.find('input[type=radio]').on('change', function () {
             choiceRow
                 .find('.timepref__question-choice-selected')
                 .removeClass('timepref__question-choice-selected');
@@ -43,7 +44,28 @@
             checkAllQuestions();
             updateState();
         });
+
+        choiceRow.find('input[type="range"]').each(function () {
+            var rangeInput = jQuery(this);
+            var rangeTd = rangeInput.closest('td');
+
+            rangeTd.css({
+                paddingLeft: valueWidth / 2,
+                paddingRight: valueWidth / 2
+            });
+
+            rangeInput.rangeslider({
+                polyfill: false,
+                onSlideEnd: function () {
+                    checkAllQuestions();
+                    updateState();
+                }
+            });
+        });
     });
+
+    checkAllQuestions();
+    updateState();
 
     /**
      * Serializes the current user selection and updates the current state of Block answers
@@ -53,7 +75,16 @@
         jQuery('.timepref__question-choices').each(function () {
             var choiceRow = jQuery(this);
             var selected = choiceRow.find('input:checked');
-            blockState.push(selected.length ? parseInt(selected.val()) : -1);
+            if (selected.length) {
+                blockState.push(parseInt(selected.val()));
+            } else {
+                var range = choiceRow.find('input[type=range]');
+                if (range.length) {
+                    blockState.push(parseInt(range.val()));
+                } else {
+                    blockState.push(-1);
+                }
+            }
         });
         state[blockIndex] = blockState;
         answersInput.val(JSON.stringify(state));

@@ -17,20 +17,21 @@ TOTAL_BUDGET = 20
 #: Set to True if you want blocks to be randomized in order
 RANDOMIZE_BLOCKS = False
 
+#: Set to True if the choices per question in a block should be visualized as a slider
+#: as opposed to single radio buttons
+VISUALIZE_CHOICES_AS_SLIDER = False
+
 #: The configuration for all blocks to be displayed to the user
 #: Note:
 #: - The given delays are treated as WEEKS where an initial delay of 0 means today.
 #: - The order of interest_rates given is the order in which they will be display, i.e.
 #:      to change the order of display just change the order of values here
-#: - If you want to show the least money as initial payout as first option set
-#:      show_least_initial_value_first to True.
 BLOCKS = [
     Block(
         interest_rates=[1.05, 1.10, 1.15, 1.20],
         initial_payout_delay=0,
         initial_to_last_payout_delay=35,
-        number_of_intermediate_choices=4,
-        show_least_initial_value_first=True
+        number_of_intermediate_choices=4
     ),
     Block(
         interest_rates=[1.10, 1.03],
