@@ -2,6 +2,16 @@
 
 *otime* allows you to easily create time preference based experiments for [otree](http://www.otree.org) by editing a single configuration file (see [`config.py`](./config.py)).
 
+## Screenshots
+
+Here is a screenshot of time with in total two blocks configured. The configuration options match the default ones as outlined below. 
+
+![otime with radio choices](./doc/otime_block_radio.jpg)
+
+The following screenshot shows the same configuration with `VISUALIZE_CHOICES_AS_SLIDER` set to `True`.
+
+![otime with slider](./doc/otime_block_slider.jpg)
+
 ## Configuration
 Configuration is done by editing the options present in [`config.py`](./config.py).
 
