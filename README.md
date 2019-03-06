@@ -28,7 +28,7 @@ When set to `True` the `BLOCKS` configured afterwards will not be displayed in t
 ```python
 VISUALIZE_CHOICES_AS_SLIDER = False
 ```
-Setting this variable to affects how the choices of a question in a block can be selected. When `False` (default) then the player will be faced with several radio buttons to do the selection. When `True`, a slider will be displayed allowing a more intuitive type of selection.
+Setting this variable affects how the choices of a question in a block can be selected. When `False` (default), then the player will be faced with several radio buttons to do the selection. When `True`, a slider will be displayed allowing a more intuitive type of selection.
 
 ```python
 BLOCKS = [
