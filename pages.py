@@ -27,7 +27,8 @@ class BlockPage(Page):
             'num_blocks': num_blocks,
             'progress': round(step * 100 / num_blocks),
             'curr_block': current_block,
-            'use_slider': VISUALIZE_CHOICES_AS_SLIDER
+            'use_slider': VISUALIZE_CHOICES_AS_SLIDER,
+            'num_choices': current_block.number_of_intermediate_choices + 2
         }
 
     def error_message(self, values):

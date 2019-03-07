@@ -20,7 +20,6 @@
         var choiceRow = jQuery(this);
         var questionIndex = parseInt(choiceRow.attr('data-question-index'));
         var questionRow = jQuery('.timepref__question-index-' + questionIndex);
-        var valueWidth = jQuery('.timepref__question-start td.text-center').first().width();
 
         choiceRow.find('.timepref__question-choice').on('click', function (e) {
             if (jQuery(e.target).is('input')) {
@@ -47,20 +46,22 @@
 
         choiceRow.find('input[type="range"]').each(function () {
             var rangeInput = jQuery(this);
-            var rangeTd = rangeInput.closest('td');
-
-            rangeTd.css({
-                paddingLeft: valueWidth / 2,
-                paddingRight: valueWidth / 2
-            });
-
+            var lastValue = -1;
             rangeInput.rangeslider({
                 polyfill: false,
-                onSlideEnd: function () {
+                onSlide: function (position, value) {
+                    if (lastValue !== value) {
+                        updateSliderValues(questionRow, value);
+                        lastValue = value;
+                    }
+                },
+                onSlideEnd: function (position, value) {
+                    updateSliderValues(questionRow, value);
                     checkAllQuestions();
                     updateState();
                 }
             });
+            updateSliderValues(questionRow, 1);
         });
     });
 
@@ -101,5 +102,18 @@
             jQuery('.timepref__next-button').show();
             jQuery('.timepref__waiting').hide();
         }
+    }
+
+    /**
+     * Updates all displayed values for the given slider choice index (1-based).
+     * @param questionRow The TR for the question
+     * @param choiceIndex The selected choice index (1-based)
+     */
+    function updateSliderValues(questionRow, choiceIndex) {
+        var startValue = questionRow.find('.timepref__question-start-values').children().eq(choiceIndex - 1).html();
+        var endValue = questionRow.find('.timepref__question-end-values').children().eq(choiceIndex - 1).html();
+
+        questionRow.find('.timepref__question-start-value').html(startValue);
+        questionRow.next().find('.timepref__question-end-value').html(endValue);
     }
 }());

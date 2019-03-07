@@ -14,7 +14,8 @@
 .timepref__question-start {
     border-top: 2px solid #ccc;
 }
-.timepref__question-choices {
+.timepref__question-choices,
+.timepref__with-slider .timepref__question-slider {
     border-bottom: 2px solid #ccc;
 }
 .timepref__with-slider .timepref__question-choices {
@@ -44,6 +45,17 @@
 .timepref__question-choice-selected,
 .timepref__question-choice-selected:hover {
     background-color: #baf8b9;
+}
+
+.timepref__with-slider .timepref__question-start-value,
+.timepref__with-slider .timepref__question-end-value,
+.timepref__with-slider .timepref__question-slider {
+    vertical-align: middle;
+}
+
+.timepref__with-slider .timepref__question-slider .timepref__question-start-values,
+.timepref__with-slider .timepref__question-slider .timepref__question-end-values {
+    display: none;
 }
 
 .timepref__next-button {
